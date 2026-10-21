@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+    <title>Hey Bestie 🧸</title>
+    <style>
+        :root {
+            --bg1: #ffe0ee;
+            --bg2: #e6dcff;
+            --card: #fffffff0;
+            --text: #5a2450;
+            --accent: #ff5c9a;
+            --no: #b9a6d6;
+            --soft: #ffb3d1;
+            box-sizing: border-box;
+            padding-top: env(safe-area-inset-top, 0px);
+            padding-bottom: env(safe-area-inset-bottom, 0px)
+        }
+
+        @media (prefers-color-scheme:dark) {
+            :root:not([data-theme="light"]) {
+                --bg1: #3a1440;
+                --bg2: #1f1a4d;
+                --card: #3a2150f0;
+                --text: #ffe6f3;
+                --accent: #ff77aa;
+                --no: #8f7fb0;
+                --soft: #a04a7a
+            }
+        }
+
+        :root[data-theme="dark"] {
+            --bg1: #3a1440;
+            --bg2: #1f1a4d;
+            --card: #3a2150f0;
+            --text: #ffe6f3;
+            --accent: #ff77aa;
+            --no: #8f7fb0;
+            --soft: #a04a7a
+        }
+
+        html,
+        body {
+            height: 100%;
+            margin: 0
+        }
+
+        body {
+            background: linear-gradient(160deg, var(--bg1), var(--bg2));
+            color: var(--text);
+            font-family: "Quicksand", "Poppins", "Segoe UI", system-ui, sans-serif;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            -webkit-user-select: none;
+            user-select: none
+        }
+
+        .card {
+            background: var(--card);
+            border-radius: 36px;
+            padding: 34px 22px 30px;
+            width: min(88%, 380px);
+            text-align: center;
+            box-shadow: 0 18px 50px #ff5c9a40, 0 0 0 6px #ffffff88 inset;
+            position: relative;
+            z-index: 2;
+            border: 3px dashed var(--soft)
+        }
+
+        .bear {
+            font-size: 96px;
+            display: inline-block;
+            animation: bob 1.6s ease-in-out infinite
+        }
+
+        .bubble {
+            display: inline-block;
+            background: var(--soft);
+            color: #fff;
+            border-radius: 18px;
+            padding: 4px 14px;
+            font-weight: 700;
+            font-size: .9rem;
+            margin-bottom: 6px
+        }
+
+        h1 {
+            font-size: 1.65rem;
+            margin: 8px 0 4px;
+            line-height: 1.25
+        }
+
+        p {
+            margin: 0 0 24px;
+            opacity: .75
+        }
+
+        .btns {
+            display: flex;
+            gap: 16px;
+            justify-content: center;
+            align-items: center;
+            min-height: 70px
+        }
+
+        button {
+            font: inherit;
+            font-weight: 700;
+            border: 0;
+            border-radius: 999px;
+            padding: 14px 30px;
+            font-size: 1.05rem;
+            cursor: pointer;
+            transition: transform .15s, font-size .25s, padding .25s;
+            white-space: nowrap
+        }
+
+        #yes {
+            background: var(--accent);
+            color: #fff;
+            box-shadow: 0 8px 0 #d63d78, 0 12px 22px #ff5c9a55;
+            animation: wig 2.2s infinite
+        }
+
+        #yes:active {
+            transform: translateY(5px);
+            box-shadow: 0 3px 0 #d63d78
+        }
+
+        #no {
+            background: var(--no);
+            color: #fff;
+            box-shadow: 0 6px 0 #8f7fb0;
+            transition: left .28s cubic-bezier(.3, 1.5, .5, 1), top .28s cubic-bezier(.3, 1.5, .5, 1)
+        }
+
+        #win {
+            display: none;
+            max-height: 94vh;
+            overflow-y: auto;
+            scrollbar-width: none
+        }
+
+        #win::-webkit-scrollbar {
+            display: none
+        }
+
+        .msg {
+            font-size: 1.05rem;
+            line-height: 1.6;
+            margin-top: 4px
+        }
+
+        .wishes {
+            margin-top: 16px;
+            padding-top: 14px;
+            border-top: 2px dashed var(--soft);
+            text-align: left
+        }
+
+        .wish {
+            opacity: 0;
+            transform: translateY(14px) scale(.96);
+            transition: opacity .7s, transform .7s;
+            margin: 10px 0;
+            font-size: 1rem;
+            line-height: 1.5;
+            font-weight: 600
+        }
+
+        .wish.show {
+            opacity: 1;
+            transform: none
+        }
+
+        .fin {
+            opacity: 0;
+            transition: opacity 1s;
+            margin-top: 14px;
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--accent)
+        }
+
+        .fin.show {
+            opacity: 1
+        }
+
+        .fl {
+            position: fixed;
+            bottom: -50px;
+            z-index: 1;
+            pointer-events: none;
+            animation: rise linear forwards
+        }
+
+        .sp {
+            position: fixed;
+            z-index: 0;
+            pointer-events: none;
+            animation: tw 2.4s ease-in-out infinite
+        }
+
+        @keyframes rise {
+            to {
+                transform: translateY(-118vh) rotate(25deg);
+                opacity: 0
+            }
+        }
+
+        @keyframes bob {
+
+            0%,
+            100% {
+                transform: translateY(0) rotate(-4deg)
+            }
+
+            50% {
+                transform: translateY(-10px) rotate(4deg)
+            }
+        }
+
+        @keyframes wig {
+
+            0%,
+            88%,
+            100% {
+                transform: rotate(0)
+            }
+
+            91% {
+                transform: rotate(-5deg)
+            }
+
+            94% {
+                transform: rotate(5deg)
+            }
+
+            97% {
+                transform: rotate(-3deg)
+            }
+        }
+
+        @keyframes tw {
+
+            0%,
+            100% {
+                opacity: .2;
+                transform: scale(.7)
+            }
+
+            50% {
+                opacity: 1;
+                transform: scale(1.2)
+            }
+        }
+
+        @keyframes pop {
+            from {
+                transform: scale(.3);
+                opacity: 0
+            }
+
+            to {
+                transform: scale(1);
+                opacity: 1
+            }
+        }
+
+        .pop {
+            animation: pop .7s cubic-bezier(.3, 1.6, .5, 1)
+        }
+    </style>
+</head>
+
+<body>
+    <div class="card" id="ask">
+        <div class="bubble">psst… bestie 🤫</div><br>
+        <div class="bear" id="bear">🧸</div>
+        <h1>Am I your best friend? 🥺</h1>
+        <p>Think carefully… I'm waiting 💭</p>
+        <div class="btns">
+            <button id="yes">Yes 💖</button>
+            <button id="no">No 😢</button>
+        </div>
+    </div>
+
+    <div class="card pop" id="win">
+        <div class="bear">🧸💞</div>
+        <h1>Yaaay! Thank you! 🎉</h1>
+        <div class="msg">Thank you for keeping me as your best friend 🥹❤️<br>
+            Through the laughs and the tough days, I’ll always be right here beside you 🤝</div>
+        <div class="wishes">
+            <div class="wish">🌟 May your days be filled with joy and laughter</div>
+            <div class="wish">🌈 May every dream you chase come true</div>
+            <div class="wish">🍀 May good luck and good people always find you</div>
+            <div class="wish">💌 And may our friendship stay strong, forever and always</div>
+        </div>
+        <div class="fin" id="fin">Best friends forever! 💕✨</div>
+    </div>
+
+    <script>
+        const no = document.getElementById('no'), yes = document.getElementById('yes'), bear = document.getElementById('bear');
+        const lines = ['No 😢', 'Are you sure? 🥺', 'Pleaseee 🥹', 'Think again 💭', 'Nope, can’t catch me 😜', 'Just say yes 💖', 'I’ll keep running 🏃', 'Okayyy stop 😭'];
+        const faces = ['🧸', '🥺', '😢', '😭'];
+        let moved = false, n = 0, scale = 1;
+        function run() {
+            if (!moved) { moved = true; no.style.position = 'fixed'; }
+            n++;
+            no.textContent = lines[n % lines.length];
+            bear.textContent = faces[Math.min(Math.floor(n / 2) + 1, faces.length - 1)];
+            scale = Math.min(scale + 0.07, 1.5);
+            yes.style.fontSize = (1.05 * scale) + 'rem';
+            yes.style.padding = (14 * scale) + 'px ' + (30 * scale) + 'px';
+            const m = 12, w = no.offsetWidth, h = no.offsetHeight;
+            no.style.left = (m + Math.random() * Math.max(1, innerWidth - w - 2 * m)) + 'px';
+            no.style.top = (m + Math.random() * Math.max(1, innerHeight - h - 2 * m)) + 'px';
+        }
+        ['mouseover', 'pointerenter', 'touchstart', 'focus'].forEach(ev => no.addEventListener(ev, e => { e.preventDefault(); run(); }, { passive: false }));
+        no.addEventListener('click', e => { e.preventDefault(); run(); });
+        document.addEventListener('mousemove', e => {
+            const r = no.getBoundingClientRect();
+            if (Math.hypot(e.clientX - (r.left + r.width / 2), e.clientY - (r.top + r.height / 2)) < 90) run();
+        });
+
+        const emojis = ['💖', '💕', '💗', '💓', '💞', '🩷', '🌸', '✨'];
+        function heart() {
+            const s = document.createElement('span');
+            s.className = 'fl';
+            s.textContent = emojis[Math.floor(Math.random() * emojis.length)];
+            s.style.left = Math.random() * 100 + 'vw';
+            s.style.fontSize = (18 + Math.random() * 34) + 'px';
+            s.style.animationDuration = (3 + Math.random() * 3) + 's';
+            document.body.appendChild(s);
+            setTimeout(() => s.remove(), 6500);
+        }
+        for (let i = 0; i < 14; i++) {
+            const s = document.createElement('span');
+            s.className = 'sp'; s.textContent = i % 2 ? '✨' : '💗';
+            s.style.left = Math.random() * 96 + 'vw'; s.style.top = Math.random() * 94 + 'vh';
+            s.style.fontSize = (12 + Math.random() * 14) + 'px';
+            s.style.animationDelay = (Math.random() * 2.4) + 's';
+            document.body.appendChild(s);
+        }
+        yes.addEventListener('click', () => {
+            document.getElementById('ask').style.display = 'none';
+            no.style.display = 'none';
+            document.getElementById('win').style.display = 'block';
+            for (let i = 0; i < 45; i++)setTimeout(heart, i * 50);
+            setInterval(heart, 260);
+            const ws = document.querySelectorAll('.wish');
+            ws.forEach((w, i) => setTimeout(() => w.classList.add('show'), 1800 + i * 1700));
+            setTimeout(() => document.getElementById('fin').classList.add('show'), 1800 + ws.length * 1700);
+        });
+    </script>
+</body>
+
+</html>
