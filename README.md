@@ -9,7 +9,7 @@ floating hearts and heartfelt wishes. Made to be screen-recorded and shared as a
 
 
 
-<img src="<img width="890" height="821" alt="bestfriend" src="https://github.com/user-attachments/assets/5a2721d3-62d1-4d18-8218-9bf6ff043424" />
+<img width="890" height="821" alt="bestfriend" src="https://github.com/user-attachments/assets/5a2721d3-62d1-4d18-8218-9bf6ff043424" />
 
 
 </div>
